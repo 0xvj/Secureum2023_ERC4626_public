@@ -48,7 +48,9 @@ abstract contract ERC4626 is ERC20 {
         require((shares = previewDeposit(assets)) != 0, "ZERO_SHARES");
 
         // Need to transfer before minting or ERC777s could reenter.
-        asset.safeTransferFrom(msg.sender, address(this), assets);
+        // asset.safeTransferFrom(msg.sender, address(this), assets);
+        bool success = asset.transferFrom(msg.sender, address(this), assets);
+        require(success,"tf failed");
 
         _mint(receiver, shares);
 
@@ -61,7 +63,8 @@ abstract contract ERC4626 is ERC20 {
         assets = previewMint(shares); // No need to check for rounding error, previewMint rounds up.
 
         // Need to transfer before minting or ERC777s could reenter.
-        asset.safeTransferFrom(msg.sender, address(this), assets);
+        // asset.safeTransferFrom(msg.sender, address(this), assets);
+        asset.transferFrom(msg.sender, address(this), assets);
 
         _mint(receiver, shares);
 
@@ -69,6 +72,7 @@ abstract contract ERC4626 is ERC20 {
 
         afterDeposit(assets, shares);
     }
+
 
     function withdraw(
         uint256 assets,
@@ -88,6 +92,7 @@ abstract contract ERC4626 is ERC20 {
         _burn(owner, shares);
 
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
+
 
         asset.safeTransfer(receiver, assets);
     }

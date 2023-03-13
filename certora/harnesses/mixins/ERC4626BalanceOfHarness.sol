@@ -2,9 +2,9 @@
 pragma solidity >=0.8.0;
 
 import {ERC20} from "../../../src/tokens/ERC20.sol";
-import {ERC4626} from "../../../src/mixins/ERC4626.sol";
+// import {ERC4626} from "../../../src/mixins/ERC4626.sol";
 // import {ERC4626} from "../bugs/ERC4626_burnInRedeemFromSender.sol";
-// import {ERC4626} from "../bugs/ERC4626_convToAssetsDivUp.sol";
+import {ERC4626} from "../bugs/ERC4626_convToAssetsDivUp.sol";
 // import {ERC4626} from "../bugs/ERC4626_noIfInWithdraw.sol";
 // import {ERC4626} from "../bugs/ERC4626_notUsingAssetInDeposit.sol";
 // import {ERC4626} from "../bugs/ERC4626_previewMintShortReturn.sol";
